@@ -5,24 +5,6 @@
    then <script src="site.js"></script>
 */
 
-// Netlify Identity — redirect to /admin after login (needed for email confirmation links)
-(function () {
-  const idScript = document.createElement('script');
-  idScript.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
-  document.head.appendChild(idScript);
-  idScript.onload = function () {
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', function (user) {
-        if (!user) {
-          window.netlifyIdentity.on('login', function () {
-            document.location.href = '/admin/';
-          });
-        }
-      });
-    }
-  };
-})();
-
 (function () {
   // Early theme init — runs immediately so the toggle button + drawer render in the right state.
   // (The page itself avoids a flash via an inline <script> in <head>.)

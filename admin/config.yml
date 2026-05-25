@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: svrdnk/licey-lider
   branch: main
 
 locale: uk
