@@ -1,81 +1,87 @@
 {
   "bells": [
-    {"num": 1, "start": "08:30", "end": "09:15", "break": "15 хв перерва"},
-    {"num": 2, "start": "09:30", "end": "10:15", "break": "10 хв перерва"},
-    {"num": 3, "start": "10:25", "end": "11:10", "break": "10 хв перерва"},
-    {"num": 4, "start": "11:20", "end": "12:05", "break": "20 хв обід"},
-    {"num": 5, "start": "12:25", "end": "13:10", "break": "10 хв перерва"},
-    {"num": 6, "start": "13:20", "end": "14:05", "break": "10 хв перерва"},
-    {"num": 7, "start": "14:15", "end": "15:00", "break": "10 хв перерва"},
-    {"num": 8, "start": "15:10", "end": "15:55", "break": "—"}
+    {
+      "num": 1,
+      "start": "08:30",
+      "end": "09:15",
+      "break": "15 хв перерва"
+    },
+    {
+      "num": 2,
+      "start": "09:30",
+      "end": "10:15",
+      "break": "10 хв перерва"
+    },
+    {
+      "num": 3,
+      "start": "10:25",
+      "end": "11:10",
+      "break": "10 хв перерва"
+    },
+    {
+      "num": 4,
+      "start": "11:20",
+      "end": "12:05",
+      "break": "20 хв обід"
+    },
+    {
+      "num": 5,
+      "start": "12:25",
+      "end": "13:10",
+      "break": "10 хв перерва"
+    },
+    {
+      "num": 6,
+      "start": "13:20",
+      "end": "14:05",
+      "break": "10 хв перерва"
+    },
+    {
+      "num": 7,
+      "start": "14:15",
+      "end": "15:00",
+      "break": "10 хв перерва"
+    },
+    {
+      "num": 8,
+      "start": "15:10",
+      "end": "15:55",
+      "break": "—"
+    }
   ],
   "classes": [
     {
-      "name": "5-А",
       "mon": [
-        {"subject": "Українська мова", "room": "каб. 12", "highlight": false},
-        {"subject": "Математика", "room": "каб. 5", "highlight": true},
-        {"subject": "Природознавство", "room": "каб. 14", "highlight": false},
-        {"subject": "Англійська", "room": "каб. 21", "highlight": false},
-        {"subject": "Образотворче", "room": "арт-студія", "highlight": false},
-        {"subject": "", "room": "", "highlight": false}
+        {
+          "highlight": true,
+          "subject": "Математика"
+        }
       ],
+      "name": "5",
       "tue": [
-        {"subject": "Математика", "room": "каб. 5", "highlight": true},
-        {"subject": "Українська", "room": "каб. 12", "highlight": false},
-        {"subject": "Історія України", "room": "каб. 8", "highlight": false},
-        {"subject": "Фізкультура", "room": "спортзал", "highlight": false},
-        {"subject": "Фізкультура", "room": "спортзал", "highlight": true},
-        {"subject": "Трудове навчання", "room": "майстерня", "highlight": false}
+        {
+          "highlight": false,
+          "subject": "Географія"
+        }
       ],
       "wed": [
-        {"subject": "Англійська", "room": "каб. 21", "highlight": false},
-        {"subject": "Математика", "room": "каб. 5", "highlight": true},
-        {"subject": "Інформатика", "room": "каб. 17", "highlight": false},
-        {"subject": "Українська", "room": "каб. 12", "highlight": false},
-        {"subject": "Історія", "room": "каб. 8", "highlight": false},
-        {"subject": "", "room": "", "highlight": false}
+        {
+          "highlight": false,
+          "subject": "Українська мова"
+        }
       ],
       "thu": [
-        {"subject": "Природознавство", "room": "каб. 14", "highlight": false},
-        {"subject": "Українська", "room": "каб. 12", "highlight": false},
-        {"subject": "Музика", "room": "каб. 23", "highlight": true},
-        {"subject": "Англійська", "room": "каб. 21", "highlight": false},
-        {"subject": "Інформатика", "room": "каб. 17", "highlight": false},
-        {"subject": "Класна година", "room": "каб. 12", "highlight": true}
+        {
+          "highlight": false,
+          "subject": "Українська література"
+        }
       ],
       "fri": [
-        {"subject": "Математика", "room": "каб. 5", "highlight": true},
-        {"subject": "Англійська", "room": "каб. 21", "highlight": false},
-        {"subject": "Українська", "room": "каб. 12", "highlight": false},
-        {"subject": "Природознавство", "room": "каб. 14", "highlight": false},
-        {"subject": "", "room": "", "highlight": false},
-        {"subject": "", "room": "", "highlight": false}
+        {
+          "highlight": false,
+          "subject": "Фізична підготовка"
+        }
       ]
-    },
-    {
-      "name": "7-Б",
-      "mon": [],
-      "tue": [],
-      "wed": [],
-      "thu": [],
-      "fri": []
-    },
-    {
-      "name": "9-А",
-      "mon": [],
-      "tue": [],
-      "wed": [],
-      "thu": [],
-      "fri": []
-    },
-    {
-      "name": "12-А",
-      "mon": [],
-      "tue": [],
-      "wed": [],
-      "thu": [],
-      "fri": []
     }
   ]
 }
