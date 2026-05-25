@@ -1044,29 +1044,6 @@
   [data-theme="dark"] .photo { background: var(--cream-2); }
   [data-theme="dark"] .ph-label { background: rgba(20,28,33,0.6); color: rgba(231,227,218,0.8); }
 
-  /* bells */
-  [data-theme="dark"] .bells-head { color: rgba(231,227,218,0.35); }
-  [data-theme="dark"] .bell,
-  [data-theme="dark"] .bell.alt {
-    background: rgba(255,255,255,0.07);
-    box-shadow: none;
-  }
-  [data-theme="dark"] .bell .num,
-  [data-theme="dark"] .bell.alt .num {
-    background: rgba(227,201,147,0.18);
-    color: var(--gold);
-  }
-  [data-theme="dark"] .bell .label { color: #F4F0E8; }
-  [data-theme="dark"] .bell .time { color: var(--gold); }
-  [data-theme="dark"] .bell .brk {
-    background: rgba(255,255,255,0.09);
-    color: rgba(231,227,218,0.75);
-  }
-  [data-theme="dark"] .bell .brk.none {
-    background: transparent;
-    color: rgba(231,227,218,0.2);
-  }
-
   /* ─────────── THEME TOGGLE BUTTON ─────────── */
   .theme-toggle {
     background: rgba(46,59,78,0.06);
@@ -1107,3 +1084,120 @@
     margin-right: 8px;
   }
   [data-theme="dark"] .drawer-theme-toggle { background: rgba(201,212,226,0.08); }
+
+
+  /* ─────────── DARK THEME PATCH v2 ─────────── */
+  /* Light "islands" — redefine vars locally so internal styles render as light.
+     Apply to: bento cards on home, week-grid, tinted info-cards, and inline
+     tinted backgrounds (slate-soft / gold-warm). All literal hex colors inside
+     (#0e1417, #fff, rgba(20,28,33,...)) work as designed without further overrides. */
+  [data-theme="dark"] .card.schedule,
+  [data-theme="dark"] .card.news,
+  [data-theme="dark"] .week-grid,
+  [data-theme="dark"] .info-card.tinted-slate,
+  [data-theme="dark"] .info-card.tinted-gold,
+  [data-theme="dark"] .map-card,
+  [data-theme="dark"] [style*="background:var(--slate-soft)"],
+  [data-theme="dark"] [style*="background:var(--gold-warm)"] {
+    --cream: #FBF9F6;
+    --cream-2: #F4F0E8;
+    --slate: #8FA7BD;
+    --slate-soft: #DCE6F0;
+    --charcoal: #2C3539;
+    --teal-gray: #2E3B4E;
+    --gold: #E3C993;
+    --gold-warm: #EBD7A8;
+    --line: rgba(44, 53, 57, 0.08);
+    color-scheme: light;
+  }
+
+  /* ─── Розклад page: standalone bells (dark surface) ─── */
+  [data-theme="dark"] .bells.standalone .bell {
+    background: rgba(255,255,255,0.04);
+    border-color: var(--line);
+  }
+  [data-theme="dark"] .bells.standalone .bell.alt {
+    background: transparent;
+    border-color: transparent;
+  }
+  [data-theme="dark"] .bells.standalone .bell .label { color: #F4F0E8; }
+  [data-theme="dark"] .bells.standalone .bell .time { color: var(--teal-gray); }
+  [data-theme="dark"] .bells.standalone .bell .num {
+    background: var(--slate);
+    color: #14181D;
+  }
+  [data-theme="dark"] .bells.standalone .bell.alt .num {
+    background: rgba(255,255,255,0.10);
+    color: #F4F0E8;
+  }
+  [data-theme="dark"] .bells.standalone .bell .brk {
+    background: rgba(255,255,255,0.07);
+    color: rgba(231,227,218,0.72);
+  }
+  [data-theme="dark"] .bells.standalone .bell .brk.none {
+    background: transparent;
+    color: rgba(231,227,218,0.3);
+  }
+  [data-theme="dark"] .bells.standalone .bells-head { color: rgba(231,227,218,0.45); }
+
+  /* schedule tabs */
+  [data-theme="dark"] .schedule-tabs { background: rgba(143,167,189,0.10); }
+  [data-theme="dark"] .schedule-tab { color: var(--teal-gray); }
+  [data-theme="dark"] .schedule-tab:hover { background: rgba(255,255,255,0.06); }
+  [data-theme="dark"] .schedule-tab.active {
+    background: rgba(255,255,255,0.12);
+    color: #F4F0E8;
+    box-shadow: none;
+  }
+
+  /* ─── Контакти ─── */
+  [data-theme="dark"] .contact-row:not([style*="--slate-soft"]):not([style*="--gold-warm"]) {
+    background: var(--cream-2);
+    border-color: var(--line);
+  }
+  [data-theme="dark"] .contact-row:not([style*="--slate-soft"]):not([style*="--gold-warm"]) .val { color: #F4F0E8; }
+  [data-theme="dark"] .contact-row:not([style*="--slate-soft"]):not([style*="--gold-warm"]) .lbl { color: rgba(231,227,218,0.5); }
+  [data-theme="dark"] .contact-row:not([style*="--slate-soft"]):not([style*="--gold-warm"]) .ic {
+    background: rgba(143,167,189,0.20);
+    color: var(--teal-gray);
+  }
+  [data-theme="dark"] .contact-row:not([style*="--slate-soft"]):not([style*="--gold-warm"]) .arr {
+    background: rgba(201,212,226,0.08);
+    color: var(--teal-gray);
+  }
+
+  /* social chip stays warm gold — works on both themes */
+
+  /* ─── inline-styled white cards (Новини articles, etc.) — flip to dark ─── */
+  [data-theme="dark"] [style*="background:#fff"] {
+    background: var(--cream-2) !important;
+    border-color: var(--line) !important;
+  }
+  /* text overrides scoped to within those flipped cards */
+  [data-theme="dark"] [style*="background:#fff"] [style*="color:#0e1417"],
+  [data-theme="dark"] [style*="background:#fff"] strong[style*="color:#0e1417"] {
+    color: #F4F0E8 !important;
+  }
+  [data-theme="dark"] [style*="background:#fff"] [style*="color:rgba(46,59,78,0.6)"] {
+    color: rgba(201,212,226,0.7) !important;
+  }
+  [data-theme="dark"] [style*="background:#fff"] [style*="color:rgba(20,28,33,0.5)"] {
+    color: rgba(231,227,218,0.5) !important;
+  }
+  [data-theme="dark"] [style*="background:#fff"] [style*="color:rgba(20,28,33,0.55)"] {
+    color: rgba(231,227,218,0.55) !important;
+  }
+  /* Освітній контент: <strong style="color:#0e1417"> inside non-tinted .info-card */
+  [data-theme="dark"] .info-card:not(.tinted-slate):not(.tinted-gold) [style*="color:#0e1417"] {
+    color: #F4F0E8 !important;
+  }
+  [data-theme="dark"] .info-card:not(.tinted-slate):not(.tinted-gold) ul[style*="color:var(--charcoal)"] {
+    color: var(--charcoal) !important;
+  }
+
+  /* ─── Loose inline 'Зразковий розклад…' / similar small captions on dark page bg ─── */
+  /* These are direct children of .section/.wrap, not inside any island */
+  [data-theme="dark"] .section > .wrap > p[style*="color:rgba(20,28,33,0.5)"],
+  [data-theme="dark"] section > .wrap > p[style*="color:rgba(20,28,33,0.5)"] {
+    color: rgba(231,227,218,0.55) !important;
+  }
