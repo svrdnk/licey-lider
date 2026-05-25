@@ -1046,24 +1046,21 @@
 
   /* bells */
   [data-theme="dark"] .bells-head { color: rgba(231,227,218,0.35); }
-  [data-theme="dark"] .bell {
-    background: rgba(255,255,255,0.05);
+  [data-theme="dark"] .bell,
+  [data-theme="dark"] .bell.alt {
+    background: rgba(255,255,255,0.07);
     box-shadow: none;
   }
-  [data-theme="dark"] .bell.alt { background: rgba(255,255,255,0.09); }
-  [data-theme="dark"] .bell .num {
-    background: rgba(143,167,189,0.18);
-    color: #C9D4E2;
-  }
+  [data-theme="dark"] .bell .num,
   [data-theme="dark"] .bell.alt .num {
-    background: rgba(143,167,189,0.26);
-    color: #D8E4F0;
+    background: rgba(227,201,147,0.18);
+    color: var(--gold);
   }
-  [data-theme="dark"] .bell .label { color: #E7E3DA; }
+  [data-theme="dark"] .bell .label { color: #F4F0E8; }
   [data-theme="dark"] .bell .time { color: var(--gold); }
   [data-theme="dark"] .bell .brk {
-    background: rgba(201,212,226,0.10);
-    color: rgba(231,227,218,0.65);
+    background: rgba(255,255,255,0.09);
+    color: rgba(231,227,218,0.75);
   }
   [data-theme="dark"] .bell .brk.none {
     background: transparent;
