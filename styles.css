@@ -1044,6 +1044,32 @@
   [data-theme="dark"] .photo { background: var(--cream-2); }
   [data-theme="dark"] .ph-label { background: rgba(20,28,33,0.6); color: rgba(231,227,218,0.8); }
 
+  /* bells */
+  [data-theme="dark"] .bells-head { color: rgba(231,227,218,0.35); }
+  [data-theme="dark"] .bell {
+    background: rgba(255,255,255,0.05);
+    box-shadow: none;
+  }
+  [data-theme="dark"] .bell.alt { background: rgba(255,255,255,0.09); }
+  [data-theme="dark"] .bell .num {
+    background: rgba(143,167,189,0.18);
+    color: #C9D4E2;
+  }
+  [data-theme="dark"] .bell.alt .num {
+    background: rgba(143,167,189,0.26);
+    color: #D8E4F0;
+  }
+  [data-theme="dark"] .bell .label { color: #E7E3DA; }
+  [data-theme="dark"] .bell .time { color: var(--gold); }
+  [data-theme="dark"] .bell .brk {
+    background: rgba(201,212,226,0.10);
+    color: rgba(231,227,218,0.65);
+  }
+  [data-theme="dark"] .bell .brk.none {
+    background: transparent;
+    color: rgba(231,227,218,0.2);
+  }
+
   /* ─────────── THEME TOGGLE BUTTON ─────────── */
   .theme-toggle {
     background: rgba(46,59,78,0.06);
