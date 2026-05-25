@@ -1,0 +1,191 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: uk
+
+media_folder: uploads
+public_folder: /uploads
+
+collections:
+  - name: pages
+    label: Управління сайтом
+    files:
+
+      # ──────────── НОВИНИ ────────────
+      - name: news
+        label: Новини
+        file: content/news.json
+        format: json
+        fields:
+          - label: Список новин
+            name: items
+            widget: list
+            summary: "{{title}} ({{date}})"
+            fields:
+              - {label: Заголовок, name: title, widget: string}
+              - label: Дата
+                name: date
+                widget: datetime
+                format: "YYYY-MM-DD"
+                date_format: "DD.MM.YYYY"
+                time_format: false
+              - label: Категорія
+                name: category
+                widget: select
+                options: [Олімпіада, Збори, Подія, Конкурс, Екскурсія, Інше]
+              - {label: Фото, name: image, widget: image, required: false}
+              - {label: Короткий опис, name: description, widget: text}
+              - label: Час читання (хв)
+                name: readTime
+                widget: number
+                value_type: int
+                default: 3
+
+      # ──────────── РОЗКЛАД ────────────
+      - name: schedule
+        label: Розклад
+        file: content/schedule.json
+        format: json
+        fields:
+          - label: Дзвінки
+            name: bells
+            widget: list
+            summary: "Урок {{num}} · {{start}}–{{end}}"
+            fields:
+              - {label: "Номер уроку", name: num, widget: number, value_type: int}
+              - {label: "Початок (08:30)", name: start, widget: string}
+              - {label: "Кінець (09:15)", name: end, widget: string}
+              - {label: "Перерва", name: break, widget: string, hint: "Наприклад: 10 хв перерва або — якщо немає"}
+          - label: Класи
+            name: classes
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - {label: "Назва класу", name: name, widget: string, hint: "Наприклад: 5-А"}
+              - label: Понеділок
+                name: mon
+                widget: list
+                summary: "Урок {{count}} — {{subject}}"
+                fields:
+                  - {label: Предмет, name: subject, widget: string}
+                  - {label: Кабінет, name: room, widget: string, required: false}
+                  - {label: Виділити жовтим, name: highlight, widget: boolean, default: false}
+              - label: Вівторок
+                name: tue
+                widget: list
+                fields:
+                  - {label: Предмет, name: subject, widget: string}
+                  - {label: Кабінет, name: room, widget: string, required: false}
+                  - {label: Виділити жовтим, name: highlight, widget: boolean, default: false}
+              - label: Середа
+                name: wed
+                widget: list
+                fields:
+                  - {label: Предмет, name: subject, widget: string}
+                  - {label: Кабінет, name: room, widget: string, required: false}
+                  - {label: Виділити жовтим, name: highlight, widget: boolean, default: false}
+              - label: Четвер
+                name: thu
+                widget: list
+                fields:
+                  - {label: Предмет, name: subject, widget: string}
+                  - {label: Кабінет, name: room, widget: string, required: false}
+                  - {label: Виділити жовтим, name: highlight, widget: boolean, default: false}
+              - label: "П'ятниця"
+                name: fri
+                widget: list
+                fields:
+                  - {label: Предмет, name: subject, widget: string}
+                  - {label: Кабінет, name: room, widget: string, required: false}
+                  - {label: Виділити жовтим, name: highlight, widget: boolean, default: false}
+
+      # ──────────── КОМАНДА ────────────
+      - name: team
+        label: Команда
+        file: content/team.json
+        format: json
+        fields:
+          - label: Адміністрація
+            name: admin
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - {label: ПІБ, name: name, widget: string}
+              - {label: Посада (коротко), name: role, widget: string}
+              - {label: Повна посада, name: detail, widget: string}
+              - {label: Підпис над іменем, name: eyebrow, widget: string, hint: "Наприклад: Директор"}
+              - {label: Фото, name: photo, widget: image}
+          - label: Вчителі
+            name: teachers
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - {label: ПІБ, name: name, widget: string}
+              - {label: Предмет, name: subject, widget: string}
+              - {label: Повна посада, name: detail, widget: string}
+              - label: Звертання
+                name: gender
+                widget: select
+                options: [Вчитель, Вчителька]
+              - {label: Фото, name: photo, widget: image, required: false}
+          - label: Фахівці
+            name: specialists
+            widget: list
+            summary: "{{name}}"
+            fields:
+              - {label: ПІБ, name: name, widget: string}
+              - {label: Посада, name: role, widget: string}
+              - {label: Деталі, name: detail, widget: string}
+              - {label: Підпис над іменем, name: eyebrow, widget: string}
+              - {label: Фото, name: photo, widget: image}
+
+      # ──────────── ГАЛЕРЕЯ ────────────
+      - name: gallery
+        label: Галерея
+        file: content/gallery.json
+        format: json
+        fields:
+          - label: Фотографії
+            name: photos
+            widget: list
+            summary: "{{alt}} ({{category}})"
+            fields:
+              - {label: Фото, name: src, widget: image}
+              - {label: Опис (alt), name: alt, widget: string, required: false}
+              - label: Категорія
+                name: category
+                widget: select
+                options: [Уроки, Події, Спорт, Творчість, Випуски]
+
+      # ──────────── НАЛАШТУВАННЯ ────────────
+      - name: settings
+        label: Налаштування сайту
+        file: content/settings.json
+        format: json
+        fields:
+          - {label: Назва ліцею, name: schoolName, widget: string}
+          - {label: Девіз, name: tagline, widget: string}
+          - {label: Текст про набір (на головній), name: enrollEyebrow, widget: string}
+          - {label: Адреса, name: address, widget: string}
+          - {label: Поштовий індекс, name: zip, widget: string}
+          - {label: Місто/смт, name: city, widget: string}
+          - {label: Телефон директора, name: phoneDirector, widget: string}
+          - {label: Телефон заступника, name: phoneDeputy, widget: string}
+          - {label: Email, name: email, widget: string}
+          - {label: Instagram (URL), name: instagram, widget: string}
+          - {label: Telegram (URL), name: telegram, widget: string}
+          - {label: Facebook (URL), name: facebook, widget: string}
+          - {label: Класи (діапазон), name: grades, widget: string, hint: "Наприклад: 5–12"}
+          - label: Гуртків та секцій
+            name: clubsCount
+            widget: number
+            value_type: int
+          - label: Каналів у соцмережах
+            name: socialCount
+            widget: number
+            value_type: int
+          - label: Педагогів
+            name: teachersCount
+            widget: number
+            value_type: int

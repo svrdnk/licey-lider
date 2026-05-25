@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Новини — Пісківський ліцей «Лідер»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="description" content="Актуальні новини Пісківського ліцею «Лідер» — конкурси, олімпіади, екскурсії та свята шкільного життя." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ліцей «Лідер» · Пісківка" />
+<meta property="og:title" content="Новини — Пісківський ліцей «Лідер»" />
+<meta property="og:description" content="Актуальні новини ліцею — конкурси, олімпіади, екскурсії та свята шкільного життя." />
+<meta property="og:image" content="https://www.litsey-lider.org/wp-content/uploads/2024/04/IMG_9113-1024x768.jpg" />
+<meta property="og:locale" content="uk_UA" />
+<meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+
+<div data-site-header data-page="news"></div>
+
+<section class="page-hero">
+  <div class="wrap">
+    <a class="crumb" href="UA School.html">
+      <svg viewBox="0 0 12 12" fill="none"><path d="M7 3L4 6l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      На головну
+    </a>
+    <h1>Новини <span class="brush">ліцею
+      <svg viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true">
+        <defs><filter id="rough-11"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></defs>
+        <path d="M8 50 Q 60 18, 140 32 T 280 38 T 392 30 L 388 60 Q 300 76, 200 66 T 60 70 T 12 64 Z" fill="#E3C993" opacity="0.85" filter="url(#rough-11)"/>
+      </svg>
+    </span></h1>
+    <p class="lede">Найсвіжіші події нашої спільноти — конкурси, олімпіади, екскурсії та свята.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap" id="news-root">
+    <div style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.35);font-size:15px">Завантаження…</div>
+  </div>
+</section>
+
+<div data-site-footer></div>
+<script src="site.js"></script>
+<script>
+(async function () {
+  const root = document.getElementById('news-root');
+  const MONTHS = ['січ','лют','бер','квіт','трав','черв','лип','серп','вер','жовт','лист','груд'];
+
+  function fmtDate(str) {
+    const d = new Date(str);
+    return d.getDate() + ' ' + MONTHS[d.getMonth()];
+  }
+
+  function cardGrid(items) {
+    return items.map(it => `
+      <article style="background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow-card);display:flex;flex-direction:column">
+        <div style="aspect-ratio:16/10;background:var(--cream-2);overflow:hidden">
+          ${it.image ? `<img src="${it.image}" alt="" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"/>` : ''}
+        </div>
+        <div style="padding:24px;display:flex;flex-direction:column;gap:8px;flex:1">
+          <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(46,59,78,0.6);font-weight:600">${it.category} · ${fmtDate(it.date)}</span>
+          <h3 style="margin:0;font-size:19px;font-weight:700;letter-spacing:-0.01em;color:#0e1417;line-height:1.25">${it.title}</h3>
+          <p style="margin:0;color:var(--charcoal);opacity:0.7;font-size:14px;line-height:1.5">${it.description}</p>
+        </div>
+      </article>`).join('');
+  }
+
+  try {
+    const res = await fetch('/content/news.json');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    const items = [...data.items].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    if (!items.length) {
+      root.innerHTML = '<p style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.4)">Новин поки немає</p>';
+      return;
+    }
+
+    const [featured, ...rest] = items;
+    root.innerHTML = `
+      <article style="display:grid;grid-template-columns:1.2fr 1fr;gap:32px;background:#fff;border:1px solid var(--line);border-radius:32px;overflow:hidden;box-shadow:var(--shadow-card);margin-bottom:32px">
+        <div style="aspect-ratio:4/3;background:var(--cream-2);overflow:hidden">
+          ${featured.image ? `<img src="${featured.image}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"/>` : ''}
+        </div>
+        <div style="padding:36px 36px 36px 4px;display:flex;flex-direction:column;justify-content:center;gap:14px">
+          <span class="eyebrow"><span class="pip"></span>${featured.category}</span>
+          <h2 style="margin:0;font-size:32px;font-weight:700;letter-spacing:-0.02em;line-height:1.1;color:#0e1417">${featured.title}</h2>
+          <p style="margin:0;color:var(--charcoal);opacity:0.7;font-size:16px;line-height:1.55">${featured.description}</p>
+          <div style="font-size:13px;color:rgba(20,28,33,0.5);margin-top:4px">${fmtDate(featured.date)} · ${featured.readTime} хв читання</div>
+        </div>
+      </article>
+      ${rest.length ? `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">${cardGrid(rest)}</div>` : ''}`;
+  } catch {
+    root.innerHTML = '<p style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.4)">Не вдалося завантажити новини</p>';
+  }
+})();
+</script>
+</body>
+</html>

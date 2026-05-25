@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Галерея — Пісківський ліцей «Лідер»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="description" content="Фотогалерея Пісківського ліцею «Лідер» — уроки, події, спорт, творчість та випускні вечори." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ліцей «Лідер» · Пісківка" />
+<meta property="og:title" content="Галерея — Пісківський ліцей «Лідер»" />
+<meta property="og:description" content="Фотохроніка занять, екскурсій, свят та повсякденного життя ліцею." />
+<meta property="og:image" content="https://www.litsey-lider.org/wp-content/uploads/2024/04/IMG_9113-1024x768.jpg" />
+<meta property="og:locale" content="uk_UA" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  .gallery-grid {
+    column-count: 3;
+    column-gap: 18px;
+  }
+  .gallery-grid > a {
+    display: block;
+    margin: 0 0 18px;
+    break-inside: avoid;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: var(--shadow-photo);
+    background: var(--cream-2);
+    transition: transform 200ms ease;
+  }
+  .gallery-grid > a:hover { transform: translateY(-2px); }
+  .gallery-grid img { display: block; width: 100%; height: auto; }
+  .gallery-grid > a[hidden] { display: none; }
+
+  .filter-row {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .filter-row button {
+    background: rgba(143,167,189,0.14);
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--teal-gray);
+    padding: 10px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .filter-row button.active {
+    background: var(--teal-gray);
+    color: #fff;
+  }
+
+  @media (max-width: 880px) { .gallery-grid { column-count: 2; } }
+  @media (max-width: 520px) { .gallery-grid { column-count: 1; } }
+</style>
+</head>
+<body>
+
+<div data-site-header data-page="gallery"></div>
+
+<section class="page-hero">
+  <div class="wrap">
+    <a class="crumb" href="UA School.html">
+      <svg viewBox="0 0 12 12" fill="none"><path d="M7 3L4 6l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      На головну
+    </a>
+    <h1>Моменти з <span class="brush">життя ліцею
+      <svg viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true">
+        <defs><filter id="rough4"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="9"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></defs>
+        <path d="M8 50 Q 60 18, 140 32 T 280 38 T 392 30 L 388 60 Q 300 76, 200 66 T 60 70 T 12 64 Z" fill="#E3C993" opacity="0.85" filter="url(#rough4)"/>
+      </svg>
+    </span></h1>
+    <p class="lede">Фотохроніка занять, екскурсій, свят та повсякденного життя нашої спільноти.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:16px">
+  <div class="wrap">
+    <div class="filter-row" id="filter-row">
+      <button class="active" data-cat="">Усі</button>
+      <button data-cat="Уроки">Уроки</button>
+      <button data-cat="Події">Події</button>
+      <button data-cat="Спорт">Спорт</button>
+      <button data-cat="Творчість">Творчість</button>
+      <button data-cat="Випуски">Випуски</button>
+    </div>
+    <div class="gallery-grid" id="gallery-grid">
+      <div style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.35);font-size:15px">Завантаження…</div>
+    </div>
+  </div>
+</section>
+
+<div data-site-footer></div>
+<script src="site.js"></script>
+<script>
+(async function () {
+  const grid = document.getElementById('gallery-grid');
+  const filterRow = document.getElementById('filter-row');
+
+  try {
+    const res = await fetch('/content/gallery.json');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+
+    grid.innerHTML = data.photos.map(p => `
+      <a href="${p.src}" target="_blank" rel="noopener noreferrer" data-category="${p.category || ''}">
+        <img src="${p.src}" alt="${p.alt || ''}" loading="lazy"/>
+      </a>`).join('');
+
+    filterRow.addEventListener('click', e => {
+      const btn = e.target.closest('button[data-cat]');
+      if (!btn) return;
+      filterRow.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      grid.querySelectorAll('a[data-category]').forEach(a => {
+        a.hidden = cat !== '' && a.dataset.category !== cat;
+      });
+    });
+  } catch {
+    grid.innerHTML = '<p style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.4)">Не вдалося завантажити галерею</p>';
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Розклад — Пісківський ліцей «Лідер»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="description" content="Тижневий розклад уроків та дзвінків Пісківського ліцею «Лідер» для 5–12 класів." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ліцей «Лідер» · Пісківка" />
+<meta property="og:title" content="Розклад — Пісківський ліцей «Лідер»" />
+<meta property="og:description" content="Тижневий розклад уроків та дзвінків для учнів 5–12 класів. Оберіть свій клас." />
+<meta property="og:image" content="https://www.litsey-lider.org/wp-content/uploads/2024/04/IMG_9113-1024x768.jpg" />
+<meta property="og:locale" content="uk_UA" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  .schedule-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: rgba(143,167,189,0.14);
+    padding: 6px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+    width: max-content;
+    max-width: 100%;
+  }
+  .schedule-tab {
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--teal-gray);
+    padding: 10px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .schedule-tab:hover { background: rgba(255,255,255,0.5); }
+  .schedule-tab.active { background: #fff; color: #0e1417; box-shadow: 0 1px 4px rgba(44,53,57,0.08); }
+
+  .week-grid {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+    gap: 10px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    overflow-x: auto;
+  }
+  .week-grid .day-head {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: rgba(20,28,33,0.5);
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .week-grid .day-head .dow { display: block; color: #0e1417; font-size: 15px; letter-spacing: -0.01em; text-transform: none; margin-top: 2px; font-weight: 700; }
+  .week-grid .time-cell {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    color: rgba(20,28,33,0.55);
+    padding: 14px 8px 0 0;
+    text-align: right;
+    line-height: 1.3;
+  }
+  .week-grid .time-cell strong { display: block; color: #0e1417; font-size: 13px; font-weight: 700; font-family: inherit; }
+  .week-grid .slot {
+    background: var(--slate-soft);
+    border-radius: 14px;
+    padding: 10px 12px;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+  .week-grid .slot.gold { background: var(--gold-warm); }
+  .week-grid .slot.empty { background: rgba(143,167,189,0.08); }
+  .week-grid .slot .s-name { font-size: 13.5px; font-weight: 600; color: #0e1417; line-height: 1.2; }
+  .week-grid .slot .s-room { font-size: 11px; color: rgba(20,28,33,0.55); margin-top: 2px; }
+
+  .bells-section { padding: 56px 0 0; }
+  .bells.standalone .bell { background: #fff; border: 1px solid var(--line); }
+  .bells.standalone .bell.alt { background: var(--cream-2); border-color: transparent; }
+
+  @media (max-width: 980px) {
+    .week-grid { grid-template-columns: 60px repeat(5, 1fr); gap: 6px; padding: 16px; min-width: 520px; }
+    .week-grid .slot .s-room { display: none; }
+  }
+  @media (max-width: 640px) {
+    .schedule-tabs { border-radius: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div data-site-header data-page="schedule"></div>
+
+<section class="page-hero">
+  <div class="wrap">
+    <a class="crumb" href="UA School.html">
+      <svg viewBox="0 0 12 12" fill="none"><path d="M7 3L4 6l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      На головну
+    </a>
+    <h1>Розклад <span class="brush">занять
+      <svg viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true">
+        <defs><filter id="rough3"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></defs>
+        <path d="M8 50 Q 60 18, 140 32 T 280 38 T 392 30 L 388 60 Q 300 76, 200 66 T 60 70 T 12 64 Z" fill="#E3C993" opacity="0.85" filter="url(#rough3)"/>
+      </svg>
+    </span></h1>
+    <p class="lede">Тижневий розклад уроків та хвилини дзвінків. Оберіть клас, щоб побачити свій розклад.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:24px">
+  <div class="wrap" id="schedule-root">
+    <div style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.35);font-size:15px">Завантаження…</div>
+  </div>
+</section>
+
+<section class="bells-section" id="bells-root">
+</section>
+
+<div data-site-footer></div>
+<script src="site.js"></script>
+<script>
+(async function () {
+  const schedRoot = document.getElementById('schedule-root');
+  const bellsRoot = document.getElementById('bells-root');
+  const DAYS = [
+    { key: 'mon', short: 'Пн', long: 'Понеділок' },
+    { key: 'tue', short: 'Вт', long: 'Вівторок' },
+    { key: 'wed', short: 'Ср', long: 'Середа' },
+    { key: 'thu', short: 'Чт', long: 'Четвер' },
+    { key: 'fri', short: 'Пт', long: "П'ятниця" },
+  ];
+
+  function slotHTML(lesson) {
+    if (!lesson || !lesson.subject) {
+      return `<div class="slot empty"><div class="s-name" style="color:rgba(20,28,33,0.4)">—</div></div>`;
+    }
+    const cls = lesson.highlight ? 'slot gold' : 'slot';
+    return `<div class="${cls}">
+      <div class="s-name">${lesson.subject}</div>
+      ${lesson.room ? `<div class="s-room">${lesson.room}</div>` : ''}
+    </div>`;
+  }
+
+  function renderGrid(cls, bells) {
+    const numLessons = bells.length;
+    let html = `
+      <div class="week-grid" role="table" aria-label="Розклад ${cls.name} на тиждень">
+        <div class="corner"></div>
+        ${DAYS.map(d => `<div class="day-head">${d.short}<span class="dow">${d.long}</span></div>`).join('')}`;
+
+    for (let i = 0; i < numLessons; i++) {
+      const bell = bells[i];
+      html += `<div class="time-cell">${bell.num}<strong>${bell.start}</strong></div>`;
+      DAYS.forEach(d => {
+        const lessons = cls[d.key] || [];
+        html += slotHTML(lessons[i]);
+      });
+    }
+    html += `</div>`;
+    return html;
+  }
+
+  function renderBells(bells) {
+    return `
+      <div class="wrap">
+        <div class="bento-head">
+          <h2>Розклад дзвінків</h2>
+          <p>Графік уроків та перерв, який діє щодня.</p>
+        </div>
+        <div class="bells standalone">
+          <div class="bells-head">
+            <span>№</span>
+            <span></span>
+            <span>Тривалість</span>
+            <span class="lbl-break">Перерва</span>
+          </div>
+          ${bells.map((b, i) => `
+            <div class="bell ${i % 2 !== 0 ? 'alt' : ''}">
+              <div class="num">${b.num}</div>
+              <div class="label">${b.num} урок</div>
+              <div class="time">${b.start} — ${b.end}</div>
+              <div class="brk${b.break === '—' ? ' none' : ''}">${b.break}</div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+  }
+
+  try {
+    const res = await fetch('/content/schedule.json');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    const { bells, classes } = data;
+
+    if (!classes || !classes.length) {
+      schedRoot.innerHTML = '<p style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.4)">Розкладу ще немає</p>';
+      return;
+    }
+
+    let activeIdx = 0;
+
+    function render() {
+      const tabs = classes.map((c, i) =>
+        `<button class="schedule-tab${i === activeIdx ? ' active' : ''}" data-idx="${i}">${c.name}</button>`
+      ).join('');
+
+      schedRoot.innerHTML = `
+        <div class="schedule-tabs" role="tablist" aria-label="Оберіть клас">${tabs}</div>
+        ${renderGrid(classes[activeIdx], bells)}
+        <p style="font-size:13px;color:rgba(20,28,33,0.5);margin-top:14px">Актуальний на поточний тиждень. Зміни — у оголошеннях адміністрації.</p>`;
+
+      schedRoot.querySelectorAll('.schedule-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeIdx = Number(btn.dataset.idx);
+          render();
+        });
+      });
+    }
+
+    render();
+    bellsRoot.innerHTML = renderBells(bells);
+  } catch {
+    schedRoot.innerHTML = '<p style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.4)">Не вдалося завантажити розклад</p>';
+  }
+})();
+</script>
+</body>
+</html>

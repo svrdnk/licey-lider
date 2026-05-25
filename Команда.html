@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Команда — Пісківський ліцей «Лідер»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta name="description" content="Педагоги та фахівці Пісківського ліцею «Лідер» — адміністрація, вчителі та спеціалісти." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ліцей «Лідер» · Пісківка" />
+<meta property="og:title" content="Команда — Пісківський ліцей «Лідер»" />
+<meta property="og:description" content="Талановиті педагоги та фахівці, які щодня роблять навчання цікавим, безпечним і ефективним." />
+<meta property="og:image" content="https://www.litsey-lider.org/wp-content/uploads/2024/04/IMG_9113-1024x768.jpg" />
+<meta property="og:locale" content="uk_UA" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  .team-section { padding: 32px 0 56px; }
+  .team-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 14px 7px 10px;
+    background: rgba(143,167,189,0.14);
+    color: var(--teal-gray);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .team-eyebrow .pip {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--slate);
+    box-shadow: 0 0 0 3px rgba(143,167,189,0.2);
+  }
+  .team-section h2 {
+    margin: 0 0 24px;
+    font-size: clamp(26px, 2.6vw, 34px);
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: #0e1417;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .team-grid.admin {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 980px) {
+    .team-grid, .team-grid.admin { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .team-grid, .team-grid.admin { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 420px) {
+    .team-grid, .team-grid.admin { grid-template-columns: 1fr; }
+  }
+
+  .t-card {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--slate-soft);
+    box-shadow: var(--shadow-photo);
+    isolation: isolate;
+  }
+  .team-grid.admin .t-card { aspect-ratio: 5 / 6; }
+
+  .t-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1), filter 400ms ease;
+    will-change: transform, filter;
+  }
+  .t-card:hover img,
+  .t-card.is-open img {
+    transform: scale(1.06);
+    filter: brightness(0.35) saturate(0.85);
+  }
+
+  .t-overlay {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 22px 20px 18px;
+    color: #fff;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.65) 100%);
+    transition: opacity 250ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .t-overlay .t-name { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; text-wrap: balance; }
+  .t-overlay .t-role { font-size: 12px; font-weight: 500; opacity: 0.85; margin-top: 4px; line-height: 1.35; }
+  .team-grid.admin .t-overlay .t-name { font-size: 18px; }
+  .team-grid.admin .t-overlay .t-role { font-size: 13px; }
+
+  .t-card:hover .t-overlay,
+  .t-card.is-open .t-overlay { opacity: 0; transform: translateY(8px); }
+
+  .t-hover {
+    position: absolute;
+    inset: 0;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 350ms ease 60ms, transform 500ms cubic-bezier(0.16, 1, 0.3, 1) 60ms;
+    pointer-events: none;
+  }
+  .t-card:hover .t-hover,
+  .t-card.is-open .t-hover { opacity: 1; transform: translateY(0); }
+  .t-hover .t-h-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px; }
+  .t-hover .t-h-name { font-size: 18px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.18; margin-bottom: 8px; text-wrap: balance; }
+  .t-hover .t-h-role { font-size: 13px; line-height: 1.45; color: rgba(255,255,255,0.82); }
+  .t-hover .t-h-meta {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .team-grid.admin .t-hover .t-h-name { font-size: 21px; }
+
+  /* placeholder when no photo */
+  .t-placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: var(--slate-soft);
+  }
+  .t-placeholder svg { opacity: 0.3; }
+</style>
+</head>
+<body>
+
+<div data-site-header data-page="team"></div>
+
+<section class="page-hero">
+  <div class="wrap">
+    <a class="crumb" href="UA School.html">
+      <svg viewBox="0 0 12 12" fill="none"><path d="M7 3L4 6l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      На головну
+    </a>
+    <h1>Наша <span class="brush">команда
+      <svg viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true">
+        <defs><filter id="rough-13"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="13"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></defs>
+        <path d="M8 50 Q 60 18, 140 32 T 280 38 T 392 30 L 388 60 Q 300 76, 200 66 T 60 70 T 12 64 Z" fill="#E3C993" opacity="0.85" filter="url(#rough-13)"/>
+      </svg>
+    </span></h1>
+    <p class="lede">Талановиті педагоги та фахівці, які щодня роблять навчання цікавим, безпечним і ефективним. Наведи на портрет — побачиш деталі.</p>
+  </div>
+</section>
+
+<div id="team-root">
+  <div style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.35);font-size:15px">Завантаження…</div>
+</div>
+
+<div data-site-footer></div>
+<script src="site.js"></script>
+<script>
+(async function () {
+  const root = document.getElementById('team-root');
+
+  function photoEl(src, name) {
+    if (src) return `<img src="${src}" alt="${name}" loading="lazy"/>`;
+    return `<div class="t-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#2E3B4E" stroke-width="1.4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#2E3B4E" stroke-width="1.4" stroke-linecap="round"/></svg></div>`;
+  }
+
+  function card(p, eyebrow, role, detail, label) {
+    return `
+      <div class="t-card" role="article" tabindex="0">
+        ${photoEl(p.photo, p.name)}
+        <div class="t-overlay">
+          <div class="t-name">${p.name}</div>
+          <div class="t-role">${role}</div>
+        </div>
+        <div class="t-hover">
+          <div class="t-h-eyebrow">${eyebrow}</div>
+          <div class="t-h-name">${p.name}</div>
+          <div class="t-h-role">${detail}</div>
+          <div class="t-h-meta"><span>${label}</span></div>
+        </div>
+      </div>`;
+  }
+
+  function section(eyebrow, heading, gridClass, cards) {
+    return `
+      <section class="team-section">
+        <div class="wrap">
+          <span class="team-eyebrow"><span class="pip"></span>${eyebrow}</span>
+          <h2>${heading}</h2>
+          <div class="team-grid ${gridClass}">${cards}</div>
+        </div>
+      </section>`;
+  }
+
+  try {
+    const res = await fetch('/content/team.json');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+
+    const adminCards = data.admin.map(p =>
+      card(p, p.eyebrow, p.role, p.detail, 'Адміністрація')).join('');
+
+    const teacherCards = data.teachers.map(p =>
+      card(p, p.gender, p.subject, p.detail, 'Педагог')).join('');
+
+    const specCards = data.specialists.map(p =>
+      card(p, p.eyebrow, p.role, p.detail, p.eyebrow)).join('');
+
+    root.innerHTML =
+      section('Адміністрація', 'Керівництво ліцею', 'admin', adminCards) +
+      section('Вчителі', 'Педагоги та класні керівники', '', teacherCards) +
+      section('Фахівці', 'Підтримка та сервіси', '', specCards);
+
+    // Touch — перший тап відкриває деталі, другий закриває
+    root.querySelectorAll('.t-card').forEach(card => {
+      card.addEventListener('click', () => {
+        if (!window.matchMedia('(hover: none)').matches) return;
+        const isOpen = card.classList.contains('is-open');
+        root.querySelectorAll('.t-card.is-open').forEach(c => c.classList.remove('is-open'));
+        if (!isOpen) card.classList.add('is-open');
+      });
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('is-open');
+        }
+      });
+    });
+  } catch {
+    root.innerHTML = '<p style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.4)">Не вдалося завантажити команду</p>';
+  }
+})();
+</script>
+</body>
+</html>

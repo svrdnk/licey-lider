@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Пісківський ліцей «Лідер» — Простір, де народжується майбутнє</title>
+<meta name="description" content="Пісківський ліцей «Лідер» — сучасна освіта для учнів 5–12 класів у смт Пісківка. Розвиток, безпека та турбота про кожну дитину." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ліцей «Лідер» · Пісківка" />
+<meta property="og:title" content="Пісківський ліцей «Лідер» — Простір, де народжується майбутнє" />
+<meta property="og:description" content="Сучасна освіта для учнів 5–12 класів у смт Пісківка. Розвиток, безпека та турбота про кожну дитину." />
+<meta property="og:image" content="https://www.litsey-lider.org/wp-content/uploads/2024/04/IMG_9113-1024x768.jpg" />
+<meta property="og:locale" content="uk_UA" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div data-site-header data-page="home"></div>
+
+<!-- ─────────── HERO ─────────── -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow" id="enroll-eyebrow"><span class="pip"></span>Набір 2026 / 2027 відкрито</span>
+        <h1 class="headline">
+          Простір, де<br />
+          <span class="brush">
+            народжується
+            <svg viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <filter id="rough">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/>
+                  <feDisplacementMap in="SourceGraphic" scale="3"/>
+                </filter>
+              </defs>
+              <path d="M8 50 Q 60 18, 140 32 T 280 38 T 392 30 L 388 60 Q 300 76, 200 66 T 60 70 T 12 64 Z"
+                    fill="#E3C993" opacity="0.85" filter="url(#rough)"/>
+              <path d="M14 48 Q 90 28, 180 36 T 360 34" stroke="#D4B978" stroke-width="2" fill="none" opacity="0.4" filter="url(#rough)"/>
+            </svg>
+          </span><br />
+          майбутнє.
+        </h1>
+        <p class="sub">Сучасна освіта, натхнення та розвиток вашої дитини у затишному та безпечному середовищі.</p>
+        <div class="cta-row">
+          <a class="btn-primary" href="Освітній контент.html">
+            Вчитися разом
+            <span class="arrow" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6h7m0 0L6 3m3 3L6 9" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+          <div class="meta-row">
+            <div class="stack" aria-hidden="true">
+              <div class="av"></div><div class="av"></div><div class="av"></div><div class="av"></div>
+            </div>
+            <span>Спільнота учнів та родин</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="photos" aria-label="Життя ліцею">
+        <div class="photo">
+          <img src="https://www.litsey-lider.org/wp-content/uploads/2024/04/IMG_9113-1024x768.jpg" alt="Учні ліцею на занятті" />
+        </div>
+        <div class="photo">
+          <img src="https://www.litsey-lider.org/wp-content/uploads/2025/06/503641891_122265074972019386_5611842594458401507_n-1-1024x768.jpg" alt="Шкільний захід" />
+        </div>
+        <div class="photo">
+          <img src="https://www.litsey-lider.org/wp-content/uploads/2024/01/67453440_2792192530810084_4201976125850648576_n-1024x768.jpg" alt="Урочиста подія" />
+        </div>
+        <div class="photo">
+          <img src="https://www.litsey-lider.org/wp-content/uploads/2024/05/IMG_9283-1-766x1024.jpg" alt="Творчий виступ учнів" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <!-- stat strip -->
+    <div class="strip">
+      <div class="stat"><div class="n" id="stat-grades" data-count="12" data-prefix="5–">5–12</div><div class="l" id="stat-grades-lbl">класи</div></div>
+      <div class="stat"><div class="n" id="stat-clubs" data-count="10" data-suffix="+">10+</div><div class="l">гуртків та секцій</div></div>
+      <div class="stat"><div class="n" id="stat-social" data-count="3">3</div><div class="l">канали у соцмережах</div></div>
+      <div class="stat"><div class="n" id="stat-teachers" data-count="19">19</div><div class="l">педагогів</div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const els = document.querySelectorAll('.stat .n[data-count]');
+    if (!els.length) return;
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    const DURATION = 1600;
+    let ran = false;
+    window._runCounters = function() {
+      if (ran) return;
+      ran = true;
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - start) / DURATION);
+        const e = easeOut(t);
+        els.forEach(el => {
+          const target = +el.dataset.count;
+          const prefix = el.dataset.prefix || '';
+          const suffix = el.dataset.suffix || '';
+          const v = t < 1 ? Math.floor(e * target) : target;
+          el.textContent = prefix + v + suffix;
+        });
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      els.forEach(el => {
+        el.textContent = (el.dataset.prefix||'') + '0' + (el.dataset.suffix||'');
+      });
+      requestAnimationFrame(tick);
+    };
+    const strip = document.querySelector('.strip');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => { if (en.isIntersecting) { window._runCounters(); io.disconnect(); } });
+    }, { threshold: 0.35 });
+    io.observe(strip);
+  })();
+</script>
+
+<!-- ─────────── BENTO ─────────── -->
+<section class="bento" id="learn">
+  <div class="wrap">
+    <div class="bento-head">
+      <h2>Сьогодні у ліцеї</h2>
+      <p>Розклад дзвінків та найсвіжіші події нашої спільноти — все, що важливо знати зранку.</p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Schedule -->
+      <article class="card schedule">
+        <div class="card-head">
+          <div class="card-title">Розклад дзвінків <span class="count" id="bells-count">8 уроків</span></div>
+          <a class="card-link" href="Розклад.html">
+            Деталі
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h7m0 0L6 3m3 3L6 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="bells" id="bells-list">
+          <div class="bells-head">
+            <span>№</span>
+            <span></span>
+            <span>Тривалість</span>
+            <span class="lbl-break">Перерва</span>
+          </div>
+          <div class="bell"><div class="num">1</div><div class="label">1 урок</div><div class="time">08:30 — 09:15</div><div class="brk">15 хв перерва</div></div>
+          <div class="bell alt"><div class="num">2</div><div class="label">2 урок</div><div class="time">09:30 — 10:15</div><div class="brk">10 хв перерва</div></div>
+          <div class="bell"><div class="num">3</div><div class="label">3 урок</div><div class="time">10:25 — 11:10</div><div class="brk">10 хв перерва</div></div>
+          <div class="bell alt"><div class="num">4</div><div class="label">4 урок</div><div class="time">11:20 — 12:05</div><div class="brk">20 хв обід</div></div>
+          <div class="bell"><div class="num">5</div><div class="label">5 урок</div><div class="time">12:25 — 13:10</div><div class="brk">10 хв перерва</div></div>
+          <div class="bell alt"><div class="num">6</div><div class="label">6 урок</div><div class="time">13:20 — 14:05</div><div class="brk">10 хв перерва</div></div>
+          <div class="bell"><div class="num">7</div><div class="label">7 урок</div><div class="time">14:15 — 15:00</div><div class="brk">10 хв перерва</div></div>
+          <div class="bell alt"><div class="num">8</div><div class="label">8 урок</div><div class="time">15:10 — 15:55</div><div class="brk none">—</div></div>
+        </div>
+      </article>
+
+      <!-- News -->
+      <article class="card news">
+        <div class="card-head">
+          <div class="card-title">Новини</div>
+          <a class="card-link" href="Новини.html">
+            Усі новини
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h7m0 0L6 3m3 3L6 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="news-list" id="news-list">
+          <!-- fallback — replaced by JS from news.json -->
+          <a class="news-item" href="Новини.html">
+            <div class="date"><strong>25</strong>жовт</div>
+            <div class="nt">Конкурс талантів — реєстрація відкрита</div>
+            <span class="arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h7m0 0L6 3m3 3L6 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="news-item" href="Новини.html">
+            <div class="date"><strong>02</strong>лист</div>
+            <div class="nt">Урочиста посвята п'ятикласників у ліцеїсти</div>
+            <span class="arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h7m0 0L6 3m3 3L6 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="news-item" href="Новини.html">
+            <div class="date"><strong>08</strong>лист</div>
+            <div class="nt">Батьківські збори 5–12 класів · онлайн</div>
+            <span class="arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h7m0 0L6 3m3 3L6 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+          <a class="news-item" href="Новини.html">
+            <div class="date"><strong>14</strong>лист</div>
+            <div class="nt">Учні-переможці олімпіади з математики</div>
+            <span class="arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h7m0 0L6 3m3 3L6 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </div>
+
+        <div class="news-footer">
+          <a href="https://t.me/+LcyOpxe3pJA3NmI6" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Підписатись на Telegram-канал</a>
+          <span>↗</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div data-site-footer></div>
+<script src="site.js"></script>
+<script>
+(async function () {
+  const MONTHS = ['січ','лют','бер','квіт','трав','черв','лип','серп','вер','жовт','лист','груд'];
+
+  // ── Новини ──────────────────────────────────────────────
+  try {
+    const res = await fetch('/content/news.json');
+    if (!res.ok) throw 0;
+    const data = await res.json();
+    const items = [...data.items]
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 4);
+    const list = document.getElementById('news-list');
+    if (list && items.length) {
+      list.innerHTML = items.map(it => {
+        const d = new Date(it.date);
+        return `<a class="news-item" href="${encodeURI('Новини.html')}">
+          <div class="date"><strong>${d.getDate()}</strong>${MONTHS[d.getMonth()]}</div>
+          <div class="nt">${it.title}</div>
+          <span class="arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h7m0 0L6 3m3 3L6 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>`;
+      }).join('');
+    }
+  } catch {}
+
+  // ── Налаштування (лічильники) ────────────────────────────
+  try {
+    const res = await fetch('/content/settings.json');
+    if (!res.ok) throw 0;
+    const s = await res.json();
+    const parts = String(s.grades).split('–');
+    const updates = [
+      { id: 'stat-grades', prefix: parts[0] + '–', count: +parts[1], suffix: '' },
+      { id: 'stat-clubs',  prefix: '',              count: s.clubsCount,    suffix: '+' },
+      { id: 'stat-social', prefix: '',              count: s.socialCount,   suffix: '' },
+      { id: 'stat-teachers', prefix: '',            count: s.teachersCount, suffix: '' },
+    ];
+    updates.forEach(({ id, prefix, count, suffix }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.dataset.prefix = prefix;
+      el.dataset.count  = count;
+      el.dataset.suffix = suffix;
+    });
+    if (s.enrollEyebrow) {
+      const ey = document.getElementById('enroll-eyebrow');
+      if (ey) ey.lastChild.textContent = s.enrollEyebrow;
+    }
+    // Якщо анімація ще не запустилась — запускаємо зараз,
+    // щоб вона підхопила оновлені data-count
+    if (typeof window._runCounters === 'function') window._runCounters();
+  } catch {}
+
+  // ── Дзвінки ─────────────────────────────────────────────
+  try {
+    const res = await fetch('/content/schedule.json');
+    if (!res.ok) throw 0;
+    const { bells } = await res.json();
+    if (!bells || !bells.length) return;
+    const container = document.getElementById('bells-list');
+    if (!container) return;
+    const headHTML = container.querySelector('.bells-head').outerHTML;
+    container.innerHTML = headHTML + bells.map((b, i) => `
+      <div class="bell${i % 2 ? ' alt' : ''}">
+        <div class="num">${b.num}</div>
+        <div class="label">${b.num} урок</div>
+        <div class="time">${b.start} — ${b.end}</div>
+        <div class="brk${b.break === '—' ? ' none' : ''}">${b.break}</div>
+      </div>`).join('');
+    const countEl = document.getElementById('bells-count');
+    if (countEl) countEl.textContent = bells.length + ' уроків';
+  } catch {}
+})();
+</script>
+</body>
+</html>

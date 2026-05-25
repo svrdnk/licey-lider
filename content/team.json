@@ -1,0 +1,141 @@
+{
+  "admin": [
+    {
+      "name": "Руденко Руслан Васильович",
+      "role": "Директор школи",
+      "detail": "Директор школи, вчитель української літератури та основ здоров'я",
+      "eyebrow": "Директор",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/Screenshot-2024-01-31-at-22.31.58-edited-3.png"
+    },
+    {
+      "name": "Мельник Тетяна Миколаївна",
+      "role": "Заступниця директора",
+      "detail": "Заступниця директора, вчителька математики, фізики та фінансової грамотності",
+      "eyebrow": "Заступниця директора",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/IMG_6210-edited-1.jpg"
+    },
+    {
+      "name": "Лабик Марія Василівна",
+      "role": "Заступниця з виховної роботи",
+      "detail": "Заступниця директора з виховної роботи, вчителька української мови",
+      "eyebrow": "Заступниця директора",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/%D0%9F%D1%96%D1%81%D0%BA%D1%96%D0%B2%D0%BA%D0%B0-95-edited-scaled.jpg"
+    }
+  ],
+  "teachers": [
+    {
+      "name": "Лісовик Олександр Вікторович",
+      "subject": "Інформатика",
+      "detail": "Вчитель інформатики",
+      "gender": "Вчитель",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/%D0%9F%D1%96%D1%81%D0%BA%D1%96%D0%B2%D0%BA%D0%B0-98-edited-scaled.jpg"
+    },
+    {
+      "name": "Пермінова Тетяна Андріївна",
+      "subject": "Фізкультура, географія",
+      "detail": "Вчителька фізкультури та географії",
+      "gender": "Вчителька",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/IMG_6104-edited.jpg"
+    },
+    {
+      "name": "Вишневська Алла Михайлівна",
+      "subject": "Українська та зарубіжна література",
+      "detail": "Вчителька української та зарубіжної літератури",
+      "gender": "Вчителька",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/IMG_6069-1-edited.jpg"
+    },
+    {
+      "name": "Гресько Ірина Юріївна",
+      "subject": "Англійська мова",
+      "detail": "Вчителька англійської мови",
+      "gender": "Вчителька",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/photo_2024-01-24_21-03-57-edited.jpg"
+    },
+    {
+      "name": "Шелестова Єлизавета Олександрівна",
+      "subject": "Англійська мова, мистецтво",
+      "detail": "Вчителька англійської мови та мистецтва",
+      "gender": "Вчителька",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/IMG_5678-edited-1-scaled.jpeg"
+    },
+    {
+      "name": "Козир Надія Григорівна",
+      "subject": "Алгебра та геометрія",
+      "detail": "Вчителька алгебри та геометрії",
+      "gender": "Вчителька",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/IMG_6190-edited.jpg"
+    },
+    {
+      "name": "Венгльовський Ярослав Васильович",
+      "subject": "Фізика, астрономія",
+      "detail": "Вчитель фізики та астрономії",
+      "gender": "Вчитель",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/IMG_6199-edited.jpg"
+    },
+    {
+      "name": "Павленко Лідія Іванівна",
+      "subject": "Українська мова",
+      "detail": "Вчителька української мови",
+      "gender": "Вчителька",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/IMG_6112-edited-scaled.jpg"
+    },
+    {
+      "name": "Бабенко Ліна Антонівна",
+      "subject": "Трудове навчання",
+      "detail": "Вчителька трудового навчання",
+      "gender": "Вчителька",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/Screenshot-2024-01-30-at-23.19.12-1-edited.png"
+    },
+    {
+      "name": "Каштальян Олександр Васильович",
+      "subject": "Захист України",
+      "detail": "Вчитель «Захисту України»",
+      "gender": "Вчитель",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/10/20251003_093613-scaled-e1759474405554.jpg"
+    },
+    {
+      "name": "Венгльовська Олеся Сергіївна",
+      "subject": "Історія",
+      "detail": "Вчителька історії України та всесвітньої історії",
+      "gender": "Вчителька",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/10/viber_image_2025-10-14_08-19-13-977-edited.jpg"
+    },
+    {
+      "name": "Андрєєва Ксенія Володимирівна",
+      "subject": "Англійська мова",
+      "detail": "Вчителька англійської мови",
+      "gender": "Вчителька",
+      "photo": ""
+    },
+    {
+      "name": "Стеценко Віталій Юрійович",
+      "subject": "Історія України",
+      "detail": "Вчитель історії України",
+      "gender": "Вчитель",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/10/20251003_102309-scaled-e1759477142741.jpg"
+    },
+    {
+      "name": "Ковальчук Лідія Анатоліївна",
+      "subject": "Українська, література, англійська",
+      "detail": "Вчителька української мови, літератури та англійської мови",
+      "gender": "Вчителька",
+      "photo": ""
+    }
+  ],
+  "specialists": [
+    {
+      "name": "Поплавська Наталія Володимирівна",
+      "role": "Психологиня",
+      "detail": "Шкільна психологиня. Індивідуальні консультації та групові зустрічі для учнів і батьків.",
+      "eyebrow": "Психологиня",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/IMG_6132-edited-1024x1024.jpg"
+    },
+    {
+      "name": "Багінська Леся Вікторівна",
+      "role": "Бібліотекарка",
+      "detail": "Бібліотекарка ліцею. Книжки, навчальні матеріали, тематичні зустрічі для учнів.",
+      "eyebrow": "Бібліотекарка",
+      "photo": "https://www.litsey-lider.org/wp-content/uploads/2025/09/IMG_6127-edited-1024x1024.jpg"
+    }
+  ]
+}
