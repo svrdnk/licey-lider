@@ -4,6 +4,81 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Адміністрування — Ліцей «Лідер»</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Ліцей «Лідер» · CMS Branding ── */
+    :root {
+      --li-teal:   #2E3B4E;
+      --li-teal2:  #3a4a60;
+      --li-gold:   #E3C993;
+      --li-cream:  #FBF9F6;
+      --li-cream2: #F4F0E8;
+      --li-line:   rgba(46,59,78,0.12);
+    }
+
+    /* School font on everything */
+    *, *::before, *::after {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    }
+    html, body { margin: 0; padding: 0; }
+
+    /* Decap CMS 3.x uses Tailwind — override indigo/blue accent → school teal */
+    .bg-indigo-600, .bg-indigo-700, .bg-indigo-800,
+    .bg-blue-600,   .bg-blue-700,   .bg-blue-800 {
+      background-color: var(--li-teal) !important;
+    }
+    .bg-indigo-500, .bg-blue-500 {
+      background-color: var(--li-teal2) !important;
+    }
+    .hover\:bg-indigo-700:hover, .hover\:bg-indigo-800:hover,
+    .hover\:bg-blue-700:hover,   .hover\:bg-blue-800:hover {
+      background-color: var(--li-teal2) !important;
+    }
+    .text-indigo-600, .text-indigo-700,
+    .text-blue-600,   .text-blue-700 { color: var(--li-teal) !important; }
+    .text-indigo-500, .text-blue-500 { color: var(--li-teal2) !important; }
+    .border-indigo-600, .border-indigo-500,
+    .border-blue-600,   .border-blue-500 { border-color: var(--li-teal) !important; }
+    .ring-indigo-500, .ring-blue-500,
+    .focus\:ring-indigo-500, .focus\:ring-blue-500 {
+      --tw-ring-color: rgba(46,59,78,0.25) !important;
+    }
+    .focus\:border-indigo-500:focus, .focus\:border-blue-500:focus {
+      border-color: var(--li-teal) !important;
+    }
+
+    /* Inputs */
+    input[type="text"], input[type="url"], input[type="email"],
+    input[type="number"], input[type="password"], textarea, select {
+      border-radius: 8px !important;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--li-teal) !important;
+      box-shadow: 0 0 0 3px rgba(46,59,78,0.12) !important;
+      outline: none !important;
+    }
+
+    /* Rounded buttons */
+    button { border-radius: 8px !important; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #ede9e0; }
+    ::-webkit-scrollbar-thumb { background: rgba(46,59,78,0.28); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(46,59,78,0.5); }
+
+    /* Loading screen before CMS mounts */
+    body:not([class]) {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; background: var(--li-cream2);
+    }
+    body:not([class])::before {
+      content: 'Завантаження панелі керування…';
+      font-size: 14px; color: rgba(46,59,78,0.5); letter-spacing: 0.02em;
+    }
+  </style>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>

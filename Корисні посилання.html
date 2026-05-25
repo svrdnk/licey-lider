@@ -35,39 +35,30 @@
         <path d="M8 50 Q 60 18, 140 32 T 280 38 T 392 30 L 388 60 Q 300 76, 200 66 T 60 70 T 12 64 Z" fill="#E3C993" opacity="0.85" filter="url(#rough-25)"/>
       </svg>
     </span></h1>
-    <p class="lede">Освітні ресурси, офіційні сайти та платформи онлайн-навчання.</p>
+    <p class="lede" data-text="links_lede">Освітні ресурси, офіційні сайти та платформи онлайн-навчання.</p>
   </div>
 </section>
 
 
 <section class="section">
   <div class="wrap">
-    <div class="grid-cards">
-      <a class="info-card" href="https://mon.gov.ua" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-        <h3>Міністерство освіти і науки України ↗</h3>
-        <p>Офіційний сайт МОН. Накази, програми, новини освіти.</p>
-      </a>
-      <a class="info-card" href="https://testportal.gov.ua" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-        <h3>УЦОЯО ↗</h3>
-        <p>Український центр оцінювання якості освіти. ЗНО та НМТ.</p>
-      </a>
-      <a class="info-card" href="https://nus.org.ua" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-        <h3>Нова українська школа ↗</h3>
-        <p>Концепція НУШ, методичні матеріали для вчителів та батьків.</p>
-      </a>
-      <a class="info-card" href="https://imzo.gov.ua" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-        <h3>ІМЗО ↗</h3>
-        <p>Інститут модернізації змісту освіти. Підручники та посібники.</p>
-      </a>
-      <a class="info-card" href="https://www.ed-era.com" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-        <h3>EdEra ↗</h3>
-        <p>Безкоштовні онлайн-курси з шкільних предметів.</p>
-      </a>
-      <a class="info-card" href="https://prometheus.org.ua" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-        <h3>Prometheus ↗</h3>
-        <p>Платформа онлайн-курсів від найкращих українських викладачів.</p>
-      </a>
+    <div id="links-grid" class="grid-cards">
+      <!-- заповнюється з content/links.json -->
     </div>
+    <script>
+      fetch('/content/links.json')
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          var grid = document.getElementById('links-grid');
+          if (!grid || !data.items) return;
+          grid.innerHTML = data.items.map(function(link){
+            return '<a class="info-card" href="' + link.url + '" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">' +
+              '<h3>' + link.title + ' ↗</h3>' +
+              '<p>' + link.description + '</p></a>';
+          }).join('');
+        })
+        .catch(function(){});
+    </script>
   </div>
 </section>
 

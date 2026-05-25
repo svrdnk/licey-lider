@@ -135,6 +135,21 @@
     `;
   }
 
+  // Inject editable texts from page_texts.json into [data-text] elements
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch('/content/page_texts.json')
+      .then(r => r.json())
+      .then(texts => {
+        document.querySelectorAll('[data-text]').forEach(el => {
+          const key = el.getAttribute('data-text');
+          if (texts[key] !== undefined && texts[key] !== '') {
+            el.textContent = texts[key];
+          }
+        });
+      })
+      .catch(() => {});
+  });
+
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-site-header]').forEach(el => {
       const activeKey = el.getAttribute('data-page');

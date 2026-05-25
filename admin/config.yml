@@ -9,6 +9,51 @@ media_folder: uploads
 public_folder: /uploads
 
 collections:
+
+  # ══════════════ ДОКУМЕНТИ ══════════════
+  - name: documents
+    label: Документи (Прозорість)
+    description: "Публічні документи ліцею. Додай файл PDF — він одразу з'явиться на сторінці «Про нас» з кнопкою завантаження."
+    files:
+      - name: documents
+        label: Список документів
+        file: content/documents.json
+        format: json
+        fields:
+          - label: Документи
+            name: items
+            widget: list
+            summary: "{{title}}"
+            fields:
+              - {label: "Назва документу", name: title, widget: string}
+              - {label: "Короткий опис", name: description, widget: string}
+              - label: "Файл (PDF або посилання)"
+                name: file
+                widget: string
+                required: false
+                default: ""
+                hint: "Вставте URL до файлу або залиш порожнім — тоді покаже «—»"
+
+  # ══════════════ КОРИСНІ ПОСИЛАННЯ ══════════════
+  - name: links
+    label: Корисні посилання
+    description: "Посилання на сторінці «Корисні посилання». Можна додавати, видаляти, змінювати порядок."
+    files:
+      - name: links
+        label: Список посилань
+        file: content/links.json
+        format: json
+        fields:
+          - label: Посилання
+            name: items
+            widget: list
+            summary: "{{title}}"
+            fields:
+              - {label: "Назва ресурсу", name: title, widget: string}
+              - {label: "Опис", name: description, widget: text}
+              - {label: "URL (адреса сайту)", name: url, widget: string, hint: "Повне посилання з https://"}
+
+  # ══════════════ СТОРІНКИ САЙТУ ══════════════
   - name: pages
     label: Управління сайтом
     files:
@@ -168,6 +213,7 @@ collections:
           - {label: Назва ліцею, name: schoolName, widget: string}
           - {label: Девіз, name: tagline, widget: string}
           - {label: Текст про набір (на головній), name: enrollEyebrow, widget: string}
+          - {label: Текст під кнопкою «Вчитися разом», name: heroSub, widget: text, required: false, hint: "Опис на головній під заголовком"}
           - {label: Адреса, name: address, widget: string}
           - {label: Поштовий індекс, name: zip, widget: string}
           - {label: Місто/смт, name: city, widget: string}
@@ -190,3 +236,41 @@ collections:
             name: teachersCount
             widget: number
             value_type: int
+
+      # ──────────── ТЕКСТ СТОРІНОК ────────────
+      - name: page_texts
+        label: Тексти сторінок
+        file: content/page_texts.json
+        format: json
+        fields:
+          - label: "Головна — підзаголовок героя"
+            name: home_hero_sub
+            widget: text
+            hint: "Речення під «Простір, де народжується майбутнє»"
+          - label: "Про нас — вступний текст (абзац 1)"
+            name: parents_about_p1
+            widget: text
+          - label: "Про нас — вступний текст (абзац 2)"
+            name: parents_about_p2
+            widget: text
+          - label: "Про нас — «Якісна освіта» (текст картки)"
+            name: parents_why_quality
+            widget: text
+          - label: "Про нас — «Індивідуальний підхід» (текст картки)"
+            name: parents_why_individual
+            widget: text
+          - label: "Про нас — «Розвиток здібностей» (текст картки)"
+            name: parents_why_development
+            widget: text
+          - label: "Про нас — «Безпечне середовище» (текст картки)"
+            name: parents_why_safety
+            widget: text
+          - label: "Про нас — булінг (заголовок блоку)"
+            name: parents_bullying_title
+            widget: string
+          - label: "Про нас — булінг (основний текст)"
+            name: parents_bullying_text
+            widget: text
+          - label: "Корисні посилання — підзаголовок"
+            name: links_lede
+            widget: string
