@@ -94,6 +94,17 @@
   .bells.standalone .bell { background: #fff; border: 1px solid var(--line); }
   .bells.standalone .bell.alt { background: var(--cream-2); border-color: transparent; }
 
+  /* Live highlight */
+  .bell--now { background: var(--gold-warm) !important; border-color: #e3c993 !important; position: relative; }
+  .bell--now::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 60%; background: #c9a84c; border-radius: 0 2px 2px 0; }
+  .bell--break { background: rgba(227,201,147,0.18) !important; }
+  .time-cell--now strong { color: #b8943e !important; }
+  .slot--now { outline: 2.5px solid #e3c993; outline-offset: -2px; background: rgba(227,201,147,0.22) !important; }
+  .day-head--today .dow { color: #b8943e !important; }
+  .live-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #b8943e; background: rgba(227,201,147,0.22); border: 1px solid #e3c993; border-radius: 999px; padding: 4px 12px; margin-bottom: 16px; }
+  .live-badge .dot { width: 6px; height: 6px; background: #b8943e; border-radius: 50%; animation: blink 1.4s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
   @media (max-width: 980px) {
     .week-grid { grid-template-columns: 60px repeat(5, 1fr); gap: 6px; padding: 16px; min-width: 520px; }
     .week-grid .slot .s-room { display: none; }
@@ -145,44 +156,77 @@
     { key: 'thu', short: 'Чт', long: 'Четвер' },
     { key: 'fri', short: 'Пт', long: "П'ятниця" },
   ];
+  const DAY_KEYS = [null,'mon','tue','wed','thu','fri',null]; // 0=Sun,6=Sat → null
 
-  function slotHTML(lesson) {
-    if (!lesson || !lesson.subject) {
-      return `<div class="slot empty"><div class="s-name" style="color:rgba(20,28,33,0.4)">—</div></div>`;
+  function toMin(t) { const [h,m] = t.split(':').map(Number); return h*60+m; }
+
+  function liveState(bells) {
+    const now = new Date();
+    const mins = now.getHours()*60 + now.getMinutes();
+    const dayKey = DAY_KEYS[now.getDay()] || null;
+    let lessonIdx = -1;   // index of lesson in progress
+    let breakAfter = -1;  // index of bell whose break is now
+
+    for (let i = 0; i < bells.length; i++) {
+      const s = toMin(bells[i].start), e = toMin(bells[i].end);
+      if (mins >= s && mins < e) { lessonIdx = i; break; }
+      // break between bell i and i+1
+      if (i < bells.length - 1) {
+        const nextS = toMin(bells[i+1].start);
+        if (mins >= e && mins < nextS) { breakAfter = i; break; }
+      }
     }
-    const cls = lesson.highlight ? 'slot gold' : 'slot';
+    return { dayKey, lessonIdx, breakAfter };
+  }
+
+  function slotHTML(lesson, isNow) {
+    if (!lesson || !lesson.subject) {
+      return `<div class="slot empty${isNow ? ' slot--now' : ''}"><div class="s-name" style="color:rgba(20,28,33,0.4)">—</div></div>`;
+    }
+    const cls = (lesson.highlight ? 'slot gold' : 'slot') + (isNow ? ' slot--now' : '');
     return `<div class="${cls}">
       <div class="s-name">${lesson.subject}</div>
       ${lesson.room ? `<div class="s-room">${lesson.room}</div>` : ''}
     </div>`;
   }
 
-  function renderGrid(cls, bells) {
+  function renderGrid(cls, bells, state) {
+    const { dayKey, lessonIdx } = state;
     const numLessons = bells.length;
     let html = `
       <div class="week-grid" role="table" aria-label="Розклад ${cls.name} на тиждень">
         <div class="corner"></div>
-        ${DAYS.map(d => `<div class="day-head">${d.short}<span class="dow">${d.long}</span></div>`).join('')}`;
+        ${DAYS.map(d => `<div class="day-head${dayKey === d.key ? ' day-head--today' : ''}">${d.short}<span class="dow">${d.long}</span></div>`).join('')}`;
 
     for (let i = 0; i < numLessons; i++) {
       const bell = bells[i];
-      html += `<div class="time-cell">${bell.num}<strong>${bell.start}</strong></div>`;
+      const isNowRow = i === lessonIdx;
+      html += `<div class="time-cell${isNowRow ? ' time-cell--now' : ''}">${bell.num}<strong>${bell.start}</strong></div>`;
       DAYS.forEach(d => {
         const lessons = cls[d.key] || [];
-        html += slotHTML(lessons[i]);
+        html += slotHTML(lessons[i], isNowRow && dayKey === d.key);
       });
     }
     html += `</div>`;
     return html;
   }
 
-  function renderBells(bells) {
+  function renderBells(bells, state) {
+    const { lessonIdx, breakAfter } = state;
+    let badge = '';
+    if (lessonIdx >= 0) {
+      badge = `<div class="live-badge"><span class="dot"></span>Зараз іде ${lessonIdx+1}-й урок · до ${bells[lessonIdx].end}</div>`;
+    } else if (breakAfter >= 0) {
+      const nextStart = bells[breakAfter+1].start;
+      badge = `<div class="live-badge"><span class="dot"></span>Перерва · наступний урок о ${nextStart}</div>`;
+    }
     return `
       <div class="wrap">
         <div class="bento-head">
           <h2>Розклад дзвінків</h2>
           <p>Графік уроків та перерв, який діє щодня.</p>
         </div>
+        ${badge}
         <div class="bells standalone">
           <div class="bells-head">
             <span>№</span>
@@ -190,13 +234,18 @@
             <span>Тривалість</span>
             <span class="lbl-break">Перерва</span>
           </div>
-          ${bells.map((b, i) => `
-            <div class="bell ${i % 2 !== 0 ? 'alt' : ''}">
+          ${bells.map((b, i) => {
+            let cls = i % 2 !== 0 ? 'alt' : '';
+            if (i === lessonIdx) cls = 'bell--now';
+            else if (i === breakAfter) cls = 'bell--break';
+            return `
+            <div class="bell ${cls}">
               <div class="num">${b.num}</div>
               <div class="label">${b.num} урок</div>
               <div class="time">${b.start} — ${b.end}</div>
               <div class="brk${b.break === '—' ? ' none' : ''}">${b.break}</div>
-            </div>`).join('')}
+            </div>`;
+          }).join('')}
         </div>
       </div>`;
   }
@@ -215,13 +264,14 @@
     let activeIdx = 0;
 
     function render() {
+      const state = liveState(bells);
       const tabs = classes.map((c, i) =>
         `<button class="schedule-tab${i === activeIdx ? ' active' : ''}" data-idx="${i}">${c.name}</button>`
       ).join('');
 
       schedRoot.innerHTML = `
         <div class="schedule-tabs" role="tablist" aria-label="Оберіть клас">${tabs}</div>
-        ${renderGrid(classes[activeIdx], bells)}
+        ${renderGrid(classes[activeIdx], bells, state)}
         <p style="font-size:13px;color:rgba(20,28,33,0.5);margin-top:14px">Актуальний на поточний тиждень. Зміни — у оголошеннях адміністрації.</p>`;
 
       schedRoot.querySelectorAll('.schedule-tab').forEach(btn => {
@@ -230,10 +280,13 @@
           render();
         });
       });
+
+      bellsRoot.innerHTML = renderBells(bells, state);
     }
 
     render();
-    bellsRoot.innerHTML = renderBells(bells);
+    // Re-render every 30 seconds to keep highlight accurate
+    setInterval(render, 30000);
   } catch {
     schedRoot.innerHTML = '<p style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.4)">Не вдалося завантажити розклад</p>';
   }
