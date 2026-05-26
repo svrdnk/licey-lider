@@ -95,7 +95,8 @@
   .bells.standalone .bell.alt { background: var(--cream-2); border-color: transparent; }
 
   /* Live highlight */
-  .bell--now { background: var(--gold-warm) !important; border-color: #e3c993 !important; position: relative; }
+  .bell--now { background: var(--gold-warm) !important; border-color: #e3c993 !important; position: relative; color: #1a1a1a !important; }
+  .bell--now * { color: #1a1a1a !important; }
   .bell--now::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 60%; background: #c9a84c; border-radius: 0 2px 2px 0; }
   .bell--break { background: rgba(227,201,147,0.18) !important; }
   .time-cell--now strong { color: #b8943e !important; }
