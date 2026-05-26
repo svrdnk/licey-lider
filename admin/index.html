@@ -69,9 +69,8 @@
     ::-webkit-scrollbar-thumb { background: rgba(46,59,78,0.28); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(46,59,78,0.5); }
 
-    /* Hide the floating Content/Media tab bar at the bottom of the editor pane
-       (media upload is available directly in every field widget) */
-    [class~="sticky"][class~="bottom-0"] { display: none !important; }
+    /* CSS attempt (works if Tailwind classes are present) */
+    .sticky.bottom-0, [class~="sticky"][class~="bottom-0"] { display: none !important; }
 
     /* Loading screen before CMS mounts */
     body:not([class]) {
@@ -86,5 +85,43 @@
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Hide the floating "Зміст | Медіафайли" switcher bar in the editor pane.
+    // CSS alone doesn't reliably match it, so we use a MutationObserver that
+    // walks the DOM after each React render looking for the two-button container.
+    (function () {
+      function tryHide() {
+        var buttons = document.querySelectorAll('button');
+        for (var i = 0; i < buttons.length; i++) {
+          var t = buttons[i].textContent || '';
+          if (t.indexOf('Зміст') !== -1 || t.indexOf('Content') !== -1 ||
+              t.indexOf('Медіафайли') !== -1 || t.indexOf('Media') !== -1) {
+            // Walk up to find the direct bar container (typically 1-3 levels up)
+            var el = buttons[i];
+            for (var d = 0; d < 5; d++) {
+              el = el.parentElement;
+              if (!el || el === document.body) break;
+              var kids = el.children.length;
+              // The bar is a flex row with exactly 2 items (two tab buttons)
+              if (kids === 2 || kids === 1) {
+                var r = el.getBoundingClientRect();
+                // Only hide if it's narrow (≤250px tall) — avoid hiding the whole pane
+                if (r.height < 250) {
+                  el.style.setProperty('display', 'none', 'important');
+                  return;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      var observer = new MutationObserver(tryHide);
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+      // Also run after initial paint
+      setTimeout(tryHide, 1000);
+      setTimeout(tryHide, 3000);
+    })();
+  </script>
 </body>
 </html>
