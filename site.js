@@ -60,7 +60,7 @@
           ${THEME_BTN}
           <a class="nav-cta" href="${enc(byKey.schedule.href)}">
             <span class="dot"></span>
-            Електронний щоденник
+            Розклад занять
           </a>
           <button class="nav-burger" aria-label="Меню" data-open-drawer>
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -89,7 +89,7 @@
             </div>
           </div>
           ${PAGES.map(p => `<a class="drawer-link ${p.key === activeKey ? 'active' : ''}" href="${enc(p.href)}">${p.label}<span class="arr">→</span></a>`).join('')}
-          <a class="drawer-cta" href="${enc(byKey.schedule.href)}">Електронний щоденник</a>
+          <a class="drawer-cta" href="${enc(byKey.schedule.href)}">Розклад занять</a>
         </div>
       </div>
     `;
