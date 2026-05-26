@@ -69,6 +69,10 @@
     ::-webkit-scrollbar-thumb { background: rgba(46,59,78,0.28); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(46,59,78,0.5); }
 
+    /* Hide the floating Content/Media tab bar at the bottom of the editor pane
+       (media upload is available directly in every field widget) */
+    [class~="sticky"][class~="bottom-0"] { display: none !important; }
+
     /* Loading screen before CMS mounts */
     body:not([class]) {
       display: flex; align-items: center; justify-content: center;
