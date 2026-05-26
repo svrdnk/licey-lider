@@ -756,6 +756,7 @@
     /* override inline grid-template-columns:repeat(2,1fr) and similar */
     [style*="grid-template-columns:repeat(2,1fr)"],
     [style*="grid-template-columns:repeat(3,1fr)"],
+    [style*="grid-template-columns:1fr 1fr"],
     [style*="grid-template-columns:1.2fr 1fr"],
     [style*="grid-template-columns:1.1fr 1fr"],
     [style*="grid-template-columns:1.35fr 1fr"],
@@ -808,6 +809,13 @@
     .doc-row .doc-ic { width: 36px; height: 44px; font-size: 9px; }
     /* contact-grid */
     .contact-grid { grid-template-columns: 1fr !important; gap: 18px; }
+    /* reduce inline padding on big cards that collapse to 1-col */
+    [style*="padding:48px"] { padding: 24px !important; }
+    [style*="padding:40px"] { padding: 24px !important; }
+    /* live badge wraps on narrow screens */
+    .live-badge { font-size: 11px; padding: 4px 10px; }
+    /* schedule week-grid sticky time col in dark mode */
+    [data-theme="dark"] .week-grid .time-cell { background: var(--cream); }
   }
 
   /* nav burger */
@@ -840,7 +848,7 @@
     .cta-row { gap: 14px; }
     .btn-primary { padding: 14px 22px; font-size: 15px; }
     /* schedule sticky first col on horiz scroll */
-    .week-grid .time-cell { background: #fff; position: sticky; left: 0; z-index: 1; }
+    .week-grid .time-cell { background: var(--cream); position: sticky; left: 0; z-index: 1; }
     /* team admin grid */
     .team-grid.admin { grid-template-columns: repeat(2, 1fr); }
     /* page-hero spacing */
