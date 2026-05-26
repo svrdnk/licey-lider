@@ -106,17 +106,11 @@
         .then(function(data){
           var grid = document.getElementById('docs-grid');
           if (!grid || !data.items) return;
-          grid.innerHTML = data.items.map(function(doc){
-            if (doc.file) {
-              return '<a class="doc-row" href="' + doc.file + '" target="_blank" rel="noopener">' +
-                '<span class="doc-ic gold">PDF</span>' +
-                '<span class="doc-body"><strong>' + doc.title + '</strong><em>' + doc.description + '</em></span>' +
-                '<span class="doc-arr">↓</span></a>';
-            }
-            return '<div class="doc-row pending">' +
-              '<span class="doc-ic">PDF</span>' +
+          grid.innerHTML = data.items.filter(function(doc){ return doc.file; }).map(function(doc){
+            return '<a class="doc-row" href="' + doc.file + '" target="_blank" rel="noopener">' +
+              '<span class="doc-ic gold">PDF</span>' +
               '<span class="doc-body"><strong>' + doc.title + '</strong><em>' + doc.description + '</em></span>' +
-              '<span class="doc-arr">—</span></div>';
+              '<span class="doc-arr">↓</span></a>';
           }).join('');
         })
         .catch(function(){});
