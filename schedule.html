@@ -110,8 +110,81 @@
     .week-grid { grid-template-columns: 60px repeat(5, 1fr); gap: 6px; padding: 16px; min-width: 520px; }
     .week-grid .slot .s-room { display: none; }
   }
+
+  /* ── Mobile day-by-day view ── */
+  .day-switcher { display: none; }
+  .mobile-list  { display: none; }
+
   @media (max-width: 640px) {
-    .schedule-tabs { border-radius: 18px; }
+    /* class tabs: horizontal scroll, no wrap */
+    .schedule-tabs { border-radius: 14px; flex-wrap: nowrap !important; overflow-x: auto; width: 100% !important; max-width: 100%; scrollbar-width: none; }
+    .schedule-tabs::-webkit-scrollbar { display: none; }
+    .schedule-tab { flex-shrink: 0; padding: 8px 14px; font-size: 13px; }
+
+    /* hide week grid, show day view */
+    .week-grid   { display: none !important; }
+    .day-switcher {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .day-switcher::-webkit-scrollbar { display: none; }
+    .day-btn {
+      flex-shrink: 0;
+      border: none;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      background: var(--slate-soft);
+      color: var(--teal-gray);
+      transition: background 140ms, color 140ms;
+      position: relative;
+    }
+    .day-btn.today::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #b8943e;
+    }
+    .day-btn.active { background: #2E3B4E; color: #fff; }
+    .day-btn.active.today::after { background: #e3c993; }
+
+    .mobile-list {
+      display: block;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 4px 16px;
+      box-shadow: var(--shadow-card);
+    }
+    [data-theme="dark"] .mobile-list { background: var(--cream); }
+    .m-row {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .m-row:last-child { border-bottom: none; }
+    .m-row.m-now { background: rgba(227,201,147,0.18); margin: 0 -16px; padding: 12px 16px; border-radius: 12px; border-bottom: none; }
+    .m-row.m-now + .m-row { border-top: 1px solid var(--line); }
+    .m-num { font-size: 10px; font-weight: 700; color: rgba(20,28,33,0.4); text-align: right; line-height: 1; }
+    .m-num strong { display: block; font-size: 13px; color: var(--charcoal); font-family: ui-monospace,monospace; }
+    .m-now .m-num strong { color: #b8943e; }
+    .m-subject { font-size: 15px; font-weight: 600; color: #0e1417; line-height: 1.25; }
+    .m-room { font-size: 12px; color: rgba(20,28,33,0.5); margin-top: 2px; }
+    .m-empty { font-size: 14px; color: rgba(20,28,33,0.3); }
   }
 </style>
 </head>
@@ -264,22 +337,65 @@
 
     let activeIdx = 0;
 
+    // Mobile day switcher state — default to today (or Monday on weekends)
+    const todayDow = new Date().getDay();
+    let mobileDayIdx = (todayDow >= 1 && todayDow <= 5) ? todayDow - 1 : 0;
+
+    function renderMobileList(cls, bells, dayIdx, state) {
+      const d = DAYS[dayIdx];
+      const lessons = cls[d.key] || [];
+      const { lessonIdx, dayKey } = state;
+      const isToday = dayKey === d.key;
+      return `<div class="mobile-list">` +
+        bells.map((b, i) => {
+          const lesson = lessons[i];
+          const isNow = isToday && i === lessonIdx;
+          if (!lesson || !lesson.subject) {
+            return `<div class="m-row${isNow ? ' m-now' : ''}">
+              <div class="m-num">${b.num}<strong>${b.start}</strong></div>
+              <div class="m-empty">—</div>
+            </div>`;
+          }
+          return `<div class="m-row${isNow ? ' m-now' : ''}">
+            <div class="m-num">${b.num}<strong>${b.start}</strong></div>
+            <div>
+              <div class="m-subject">${lesson.subject}</div>
+              ${lesson.room ? `<div class="m-room">${lesson.room}</div>` : ''}
+            </div>
+          </div>`;
+        }).join('') + `</div>`;
+    }
+
     function render() {
       const state = liveState(bells);
+      const isMobile = window.innerWidth <= 640;
       const tabs = classes.map((c, i) =>
         `<button class="schedule-tab${i === activeIdx ? ' active' : ''}" data-idx="${i}">${c.name}</button>`
       ).join('');
 
+      let gridOrDay = '';
+      if (isMobile) {
+        const { dayKey } = state;
+        const daySwitcher = DAYS.map((d, i) => {
+          const isToday = d.key === dayKey;
+          return `<button class="day-btn${i === mobileDayIdx ? ' active' : ''}${isToday ? ' today' : ''}" data-day="${i}">${d.short}<br><small style="font-size:10px;font-weight:500">${d.long}</small></button>`;
+        }).join('');
+        gridOrDay = `<div class="day-switcher">${daySwitcher}</div>` +
+          renderMobileList(classes[activeIdx], bells, mobileDayIdx, state);
+      } else {
+        gridOrDay = renderGrid(classes[activeIdx], bells, state);
+      }
+
       schedRoot.innerHTML = `
         <div class="schedule-tabs" role="tablist" aria-label="Оберіть клас">${tabs}</div>
-        ${renderGrid(classes[activeIdx], bells, state)}
+        ${gridOrDay}
         <p style="font-size:13px;color:rgba(20,28,33,0.5);margin-top:14px">Актуальний на поточний тиждень. Зміни — у оголошеннях адміністрації.</p>`;
 
       schedRoot.querySelectorAll('.schedule-tab').forEach(btn => {
-        btn.addEventListener('click', () => {
-          activeIdx = Number(btn.dataset.idx);
-          render();
-        });
+        btn.addEventListener('click', () => { activeIdx = Number(btn.dataset.idx); render(); });
+      });
+      schedRoot.querySelectorAll('.day-btn').forEach(btn => {
+        btn.addEventListener('click', () => { mobileDayIdx = Number(btn.dataset.day); render(); });
       });
 
       bellsRoot.innerHTML = renderBells(bells, state);
@@ -288,6 +404,8 @@
     render();
     // Re-render every 30 seconds to keep highlight accurate
     setInterval(render, 30000);
+    // Re-render on resize (desktop ↔ mobile switch)
+    window.addEventListener('resize', render, { passive: true });
   } catch {
     schedRoot.innerHTML = '<p style="text-align:center;padding:80px 0;color:rgba(20,28,33,0.4)">Не вдалося завантажити розклад</p>';
   }
