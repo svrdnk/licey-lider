@@ -1,5 +1,8 @@
 {
   "photos": [
+    {"src": "/uploads/Вчителі(спільне фото).jpg", "alt": "Педагогічний колектив ліцею у вишиванках", "category": "Події"},
+    {"src": "/uploads/Командна робота.jpg", "alt": "Учні працюють над спільним проєктом", "category": "Уроки"},
+    {"src": "/uploads/Спорт.jpg", "alt": "Секція карате у спортивній залі", "category": "Спорт"},
     {"src": "https://www.litsey-lider.org/wp-content/uploads/2025/06/503641891_122265074972019386_5611842594458401507_n-1-1024x768.jpg", "alt": "Шкільне життя", "category": "Події"},
     {"src": "https://www.litsey-lider.org/wp-content/uploads/2024/05/IMG_9283-1-766x1024.jpg", "alt": "Учні ліцею", "category": "Творчість"},
     {"src": "https://www.litsey-lider.org/wp-content/uploads/2024/04/IMG_9113-1024x768.jpg", "alt": "Заняття в ліцеї", "category": "Уроки"},
