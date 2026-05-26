@@ -19,18 +19,18 @@
   const MOON_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
   const THEME_BTN = `<button class="theme-toggle" type="button" aria-label="Перемкнути тему" data-theme-toggle><span class="sun">${SUN_SVG}</span><span class="moon">${MOON_SVG}</span></button>`;
   const PAGES = [
-    { key: 'home',      label: 'Головна',                href: 'UA School.html' },
-    { key: 'news',      label: 'Новини',                  href: 'Новини.html' },
-    { key: 'gallery',   label: 'Галерея',                 href: 'Галерея.html' },
-    { key: 'team',      label: 'Команда',                 href: 'Команда.html' },
-    { key: 'content',   label: 'Освітній контент',        href: 'Освітній контент.html' },
-    { key: 'events',    label: 'Позакласне навчання',     href: 'Позакласне навчання.html' },
-    { key: 'family',    label: 'Сімейне навчання',        href: 'Сімейне навчання.html' },
-    { key: 'psych',     label: 'Психологічна хвилинка',   href: 'Психологічна хвилинка.html' },
-    { key: 'parents',   label: 'Інформація для батьків',  href: 'Інформація для батьків.html' },
-    { key: 'links',     label: 'Корисні посилання',       href: 'Корисні посилання.html' },
-    { key: 'schedule',  label: 'Розклад',                 href: 'Розклад.html' },
-    { key: 'contact',   label: 'Контакти',                href: 'Контакти.html' },
+    { key: 'home',      label: 'Головна',                href: 'index.html' },
+    { key: 'news',      label: 'Новини',                  href: 'news.html' },
+    { key: 'gallery',   label: 'Галерея',                 href: 'gallery.html' },
+    { key: 'team',      label: 'Команда',                 href: 'team.html' },
+    { key: 'content',   label: 'Освітній контент',        href: 'education.html' },
+    { key: 'events',    label: 'Позакласне навчання',     href: 'extracurricular.html' },
+    { key: 'family',    label: 'Сімейне навчання',        href: 'family.html' },
+    { key: 'psych',     label: 'Психологічна хвилинка',   href: 'psychology.html' },
+    { key: 'parents',   label: 'Інформація для батьків',  href: 'parents.html' },
+    { key: 'links',     label: 'Корисні посилання',       href: 'links.html' },
+    { key: 'schedule',  label: 'Розклад',                 href: 'schedule.html' },
+    { key: 'contact',   label: 'Контакти',                href: 'contacts.html' },
   ];
   const byKey = Object.fromEntries(PAGES.map(p => [p.key, p]));
   const enc = (s) => encodeURI(s);
