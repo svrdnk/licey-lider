@@ -1,5 +1,6 @@
 [build]
-  publish = "."
+  command = "npm install && node build.js"
+  publish = "dist"
 
 # Old Ukrainian-named URLs → new clean slugs (permanent redirect)
 [[redirects]]
